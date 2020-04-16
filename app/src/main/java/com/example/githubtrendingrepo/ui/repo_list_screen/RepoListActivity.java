@@ -1,10 +1,12 @@
-package com.example.githubtrendingrepo;
+package com.example.githubtrendingrepo.ui.repo_list_screen;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+import com.example.githubtrendingrepo.R;
+
+public class RepoListActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
