@@ -58,7 +58,7 @@ public class Repository {
         });
     }
 
-    public LiveData<List<GithubRepo>> getGithubRepo() {
+    public LiveData<List<GithubRepo>> getAllRepo() {
         return mGithubRepo;
     }
 }
