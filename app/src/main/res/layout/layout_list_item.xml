@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cv_main_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="?android:attr/selectableItemBackground">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.example.githubtrendingrepo.ui.custom_view.CircleImageView
+            android:id="@+id/civ_avatar"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="16dp"
+            android:src="@android:color/darker_gray"
+            app:layout_constraintBottom_toBottomOf="@id/txt_repository_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/txt_owner" />
+
+        <TextView
+            android:id="@+id/txt_owner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:maxLines="1"
+            android:text="Owner"
+            android:textColor="@color/colorTextData"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/civ_avatar"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txt_repository_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="16dp"
+            android:gravity="top"
+            android:maxLines="1"
+            android:text="Repository"
+            android:textColor="@color/colorTextData"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/txt_owner"
+            app:layout_constraintStart_toStartOf="@id/txt_owner"
+            app:layout_constraintTop_toBottomOf="@id/txt_owner"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/txt_desc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:maxLines="2"
+            android:text="Description"
+            android:textColor="@color/colorTextData"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@id/txt_owner"
+            app:layout_constraintStart_toStartOf="@id/txt_owner"
+            app:layout_constraintTop_toBottomOf="@id/txt_repository_title" />
+
+        <TextView
+            android:id="@+id/txt_lang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:text="Lang"
+            android:drawablePadding="8dp"
+            android:drawableStart="@drawable/circle_drawable"
+            android:textColor="@color/colorTextData"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/txt_owner"
+            app:layout_constraintTop_toBottomOf="@id/txt_desc" />
+
+        <TextView
+            android:id="@+id/txt_stars"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:drawablePadding="4dp"
+            android:drawableStart="@drawable/star_yellow"
+            android:text="Stars"
+            android:textColor="@color/colorTextData"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@id/txt_lang"
+            app:layout_constraintTop_toTopOf="@id/txt_lang" />
+
+        <TextView
+            android:id="@+id/txt_forks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:drawableStart="@drawable/fork_black"
+            android:drawablePadding="4dp"
+            android:text="Forks"
+            android:textColor="@color/colorTextData"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@id/txt_stars"
+            app:layout_constraintTop_toTopOf="@id/txt_lang" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="txt_desc,txt_stars,txt_forks,txt_lang" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
