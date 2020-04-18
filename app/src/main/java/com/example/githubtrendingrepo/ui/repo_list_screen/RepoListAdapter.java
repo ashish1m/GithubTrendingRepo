@@ -27,7 +27,6 @@ import java.util.Objects;
 
 public class RepoListAdapter extends RecyclerView.Adapter<RepoListAdapter.ViewHolder> {
 
-    private static final int POSITION = 100;
     private final LayoutInflater mInflater;
     private List<GithubRepo> mRepoList;
 
@@ -124,5 +123,4 @@ public class RepoListAdapter extends RecyclerView.Adapter<RepoListAdapter.ViewHo
             }
         }
     }
-
 }

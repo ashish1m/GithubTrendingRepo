@@ -2,6 +2,7 @@ package com.example.githubtrendingrepo.ui.repo_list_screen;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -21,13 +22,15 @@ import com.facebook.shimmer.ShimmerFrameLayout;
 import java.util.List;
 import java.util.Objects;
 
-public class RepoListActivity extends AppCompatActivity {
+public class RepoListActivity extends AppCompatActivity implements View.OnClickListener {
 
     private RecyclerView mRepoRv;
     private RepoListAdapter mRepoListAdapter;
     private RepoListViewModel mRepoListViewModel;
     private ShimmerFrameLayout mShimmerLayout;
     private SwipeRefreshLayout mSwipeRefreshLayout;
+    private View mNoInternetLayout;
+    private Button mRetryBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,25 +45,19 @@ public class RepoListActivity extends AppCompatActivity {
 
     private void initView() {
         mSwipeRefreshLayout = findViewById(R.id.swipe_container);
-        mRepoRv = findViewById(R.id.rv_repo_list);
         mShimmerLayout = findViewById(R.id.layout_shimmer);
-        mRepoRv.setHasFixedSize(true);
-        mRepoRv.setLayoutManager(new LinearLayoutManager(this));
+        mNoInternetLayout = findViewById(R.id.layout_no_internet);
+        mRetryBtn = findViewById(R.id.btn_retry);
+        mRepoRv = findViewById(R.id.rv_repo_list);
+
         DividerItemDecoration itemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
         itemDecoration.setDrawable(Objects.requireNonNull(ContextCompat.getDrawable(this, R.drawable.divider)));
+        mRepoRv.setHasFixedSize(true);
+        mRepoRv.setLayoutManager(new LinearLayoutManager(this));
         mRepoRv.addItemDecoration(itemDecoration);
         mRepoRv.setAdapter(mRepoListAdapter);
 
-        mRepoListViewModel.getAllRepo().observe(this, new Observer<List<GithubRepo>>() {
-            @Override
-            public void onChanged(List<GithubRepo> githubRepos) {
-                mSwipeRefreshLayout.setRefreshing(false);
-                mShimmerLayout.stopShimmer();
-                mShimmerLayout.setVisibility(View.GONE);
-                mRepoListAdapter.updateList(githubRepos);
-                mSwipeRefreshLayout.setVisibility(View.VISIBLE);
-            }
-        });
+        mRetryBtn.setOnClickListener(this);
 
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -80,11 +77,40 @@ public class RepoListActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         mShimmerLayout.startShimmer();
+        updateUI();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         mShimmerLayout.stopShimmer();
+    }
+
+    private void updateUI() {
+        mRepoListViewModel.getAllRepo().observe(this, new Observer<List<GithubRepo>>() {
+            @Override
+            public void onChanged(List<GithubRepo> githubRepos) {
+                mSwipeRefreshLayout.setRefreshing(false);
+                mShimmerLayout.stopShimmer();
+                mShimmerLayout.setVisibility(View.GONE);
+                if (githubRepos.size() > 0) {
+                    mNoInternetLayout.setVisibility(View.GONE);
+                    mRepoListAdapter.updateList(githubRepos);
+                    mSwipeRefreshLayout.setVisibility(View.VISIBLE);
+                } else {
+                    mNoInternetLayout.setVisibility(View.VISIBLE);
+                    mSwipeRefreshLayout.setVisibility(View.GONE);
+                }
+            }
+        });
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_retry:
+                GithubRepoApp.getInstance().getRepository().fetchGithubTrendingRepo();
+                break;
+        }
     }
 }
