@@ -9,8 +9,8 @@ import retrofit2.http.GET;
 
 public interface GithubRepoService {
 
-    String GIT_TRENDING_API = "https://github-trending-api.now.sh";
-    String REPOSITORIES = "/repositories";
+    String GIT_TRENDING_API = "https://github-trending-api.now.sh/";
+    String REPOSITORIES = "repositories";
 
     @GET(REPOSITORIES)
     Call<List<GithubRepo>> fetchTrendingRepository();

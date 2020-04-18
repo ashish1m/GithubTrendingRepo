@@ -92,7 +92,11 @@ public class RepoListAdapter extends RecyclerView.Adapter<RepoListAdapter.ViewHo
             mOwnerTv.setText(repo.getAuthor());
             mRepositoryTitleTv.setText(repo.getName());
             mDescriptionTv.setText(repo.getDescription());
-            mLanguageTv.setText(repo.getLanguage());
+            if (TextUtils.isEmpty(repo.getLanguage())){
+                mLanguageTv.setText("Unknown");
+            } else {
+                mLanguageTv.setText(repo.getLanguage());
+            }
             mStarsTv.setText(repo.getStars());
             mForksTv.setText(repo.getForks());
             if (!TextUtils.isEmpty(repo.getLanguageColor())) {
