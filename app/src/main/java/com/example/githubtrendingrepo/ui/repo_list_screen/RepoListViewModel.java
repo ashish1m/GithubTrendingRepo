@@ -13,8 +13,12 @@ public class RepoListViewModel extends ViewModel {
     private LiveData<List<GithubRepo>> mRepoList;
 
     public RepoListViewModel() {
-        GithubRepoApp.getInstance().getRepository().fetchGithubTrendingRepo();
+        fetchTrendingRepo();
         mRepoList = GithubRepoApp.getInstance().getRepository().getAllRepo();
+    }
+
+    public void fetchTrendingRepo(){
+        GithubRepoApp.getInstance().getRepository().fetchGithubTrendingRepo();
     }
 
     public LiveData<List<GithubRepo>> getAllRepo() {

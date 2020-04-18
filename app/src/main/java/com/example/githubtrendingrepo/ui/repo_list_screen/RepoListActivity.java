@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.example.githubtrendingrepo.GithubRepoApp;
 import com.example.githubtrendingrepo.R;
 import com.example.githubtrendingrepo.repository.db.entity.GithubRepo;
 import com.facebook.shimmer.ShimmerFrameLayout;
@@ -62,7 +61,7 @@ public class RepoListActivity extends AppCompatActivity implements View.OnClickL
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                GithubRepoApp.getInstance().getRepository().fetchGithubTrendingRepo();
+                mRepoListViewModel.fetchTrendingRepo();
             }
         });
 
@@ -109,7 +108,7 @@ public class RepoListActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_retry:
-                GithubRepoApp.getInstance().getRepository().fetchGithubTrendingRepo();
+                mRepoListViewModel.fetchTrendingRepo();
                 break;
         }
     }
