@@ -31,4 +31,8 @@ ext {
     archLifecycleVersion = '2.2.0'
     coreTestingVersion = '2.1.0'
     materialVersion = '1.1.0'
+    retrofitVersion = '2.6.0'
+    okhttpVersion = '3.12.1'
+    gsonVersion = '2.8.5'
+    glideVersion = '4.11.0'
 }
